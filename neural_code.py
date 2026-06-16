@@ -315,7 +315,53 @@ output: '''[[ 0.0000000e+00  0.0000000e+00  0.0000000e+00]
             [ 3.1089142e-04 -6.2469585e-04  1.1282058e-04]
             [ 3.7189163e-04 -8.5043209e-04  1.4422365e-04]]'''
 
+Softmax Activation Function 
+
+'''First we will take the take the input and then convert it into exponential value '''
+layer_outer = [4.8, 1.21, 2.385]
+
+E = 2.7828182846
+
+exp_values = []
+for output in layer_outer:
+  exp_values.append(E ** output)
+print('exponentiated values: ')
+print(exp_values)
+
+output = ''' exponentiated values: [135.99635596286427, 3.450060146304715, 11.484084068355921]'''
 
 
+'''Now, we will find the normalized exponetiated values by using the Normalization formula '''
+norm_base = sum(exp_values)
+norm_values = []
+for value in exp_values:
+  norm_values.append(value / norm_base)
+print('Normalized exponentiated values: ')
+print(norm_values)
 
+print('Sum of normalized values:', sum(norm_values))
+
+output =- '''Normalized exponentiated values: 
+[0.9010528408963393, 0.02285860142414385, 0.07608855767951678]
+Sum of normalized values: 0.9999999999999999'''
+
+''''''
+
+exp_values = np.exp(dense1.output)
+
+probabilites = exp_values / np.sum(exp_values, axis = 1, keepdims=True)
+
+layer_outputs = np.array([[4.8, 1.21, 2.385],
+                          [8.9, -1.81, 0.2],
+                          [1.41, 1.051, 0.026]])
+print('Sum without axis')
+print(np.sum(layer_outputs))
+
+print('This will be identical to the avoce since default is None:')
+print(np.sum(layer_outputs, axis=None))
+
+output = '''Sum without axis
+18.172
+This will be identical to the avoce since default is None:
+18.172'''
 
